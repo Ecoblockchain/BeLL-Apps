@@ -188,7 +188,8 @@ function updateNationCouchVersion() {
                                 obj = JSON.parse(data);
                                 var oldVersion = configDoc.version;
                                 configDoc.version = obj.version;
-                                if(configDoc.register == undefined || configDoc.availableLanguages ==null || configDoc.register == '') {
+                                var oldRegister = configDoc.register;
+                                if(oldRegister === undefined || oldRegister === null || oldRegister === '') {
 	                                configDoc['register'] = '';
 	                                configDoc.register = obj.register;
                                 }
@@ -198,7 +199,10 @@ function updateNationCouchVersion() {
                                 }
                                 configsDb.insert(configDoc, key, function(err, body) {
                                     if (err) throw err;
-                                    else console.log("updated version number from " + oldVersion + " to " + configDoc.version);
+                                    else {
+                                    	if(oldRegister != configDoc.register) console.log("updated register number from " + oldRegister + " to " + configDoc.register);
+                                    	console.log("updated version number from " + oldVersion + " to " + configDoc.version);
+                                    }
                                 });
                             });
                         }
