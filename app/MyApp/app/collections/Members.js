@@ -8,8 +8,11 @@ $(function() {
 			} else if (this.skip) {
 				return App.Server + '/members/_design/bell/_view/Members?include_docs=true&limit=20&skip=' + this.skip
 			} else if (this.searchText && this.searchText != "") {
-				return App.Server + '/members/_design/bell/_view/search?include_docs=true&limit=20&key="' + this.searchText + '"'
-			} else {
+                return App.Server + '/members/_design/bell/_view/search?include_docs=true&limit=20&key=["SHT", "' + this.searchText + '"]'
+			} else if (this.searchText && this.searchText != "") {
+                return App.Server + '/members/_design/bell/_view/search?include_docs=true&limit=20&key=["'+this.nationCode+'", "' + this.searchText + '"]'
+            }
+            else {
 				return App.Server + '/members/_design/bell/_view/Members?include_docs=true'
 			}
 		},

@@ -57,10 +57,10 @@ ddoc.views = {
     },
     search: {
         map: function(doc) {
-            var txt = doc.lastName;
+            var txt = doc.firstName;
             var words = txt.replace(/[!.,;]+/g, "").toLowerCase().split(" ");
-            for (var word in words) {
-                emit(words[word], doc._id);
+            for (var wrd in words) {
+                emit([doc.community, words[wrd]], doc._id);
             }
         }
     },
@@ -104,6 +104,15 @@ ddoc.views = {
         map: function(doc) {
             if (doc && doc.kind == 'Member') {
                 emit(doc._id, doc)
+            }
+        }
+    },
+    communitySearch: {
+        map: function(doc) {
+            var txt = doc.firstName;
+            var words = txt.replace(/[!.,;]+/g, "").toLowerCase().split(" ");
+            for (var wrd in words) {
+                emit([doc.community, words[wrd]], doc._id);
             }
         }
     }
