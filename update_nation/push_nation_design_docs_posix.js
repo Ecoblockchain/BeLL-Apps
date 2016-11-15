@@ -188,7 +188,7 @@ function updateNationCouchVersion() {
                                 obj = JSON.parse(data);
                                 var oldVersion = configDoc.version;
                                 configDoc.version = obj.version;
-                                if(configDoc.register == undefined || configDoc.availableLanguages!=null || configDoc.register != '') {
+                                if(configDoc.register == undefined || configDoc.availableLanguages ==null || configDoc.register == '') {
 	                                configDoc['register'] = '';
 	                                configDoc.register = obj.register;
                                 }
