@@ -2702,12 +2702,12 @@ $(function() {
             membersView.changeDirection();
             if(App.configuration.get('type') == 'nation') {
 	            $.ajax({
-	                url: 'http://laxman.ht.ole.org:5978/community/_design/bell/_view/getCommunityByCode',
+	                url: '/community/_design/bell/_view/getCommunityByCode',
 	                type: 'GET',
 	                dataType: "jsonp",
 	                async: false,
 	                success: function(json) {
-	                	var communityList = '<option>'+App.languageDict.attributes.Select_Comm+'</option>';
+	                	var communityList = '<option value="">'+App.languageDict.attributes.Select_Comm+'</option>';
 	                	$.each(json.rows, function(rec, index) {
 	                		communityList += '<option value="'+this.value.Code+'">'+this.value.Name+'</option>';
 	                	})
