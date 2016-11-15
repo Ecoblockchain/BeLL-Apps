@@ -211,8 +211,10 @@ function updateNationCouchVersion() {
                                 obj = JSON.parse(data);
                                 var oldVersion = configDoc.version;
                                 configDoc.version = obj.version;
-                                configDoc['register'] = '';
-                                configDoc.register = obj.register;
+                                if(configDoc.register == undefined || configDoc.availableLanguages!=null || configDoc.register != '') {
+	                                configDoc['register'] = '';
+	                                configDoc.register = obj.register;
+                                }
                                 if(configDoc.availableLanguages && configDoc.availableLanguages!=undefined && configDoc.availableLanguages!=null  )
                                 {
                                     delete configDoc.availableLanguages;
