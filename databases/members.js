@@ -57,7 +57,7 @@ ddoc.views = {
     },
     search: {
         map: function(doc) {
-            var txt = doc.firstName;
+            var txt = doc.lastName;
             var words = txt.replace(/[!.,;]+/g, "").toLowerCase().split(" ");
             for (var wrd in words) {
                 emit([doc.community, words[wrd]], doc._id);
