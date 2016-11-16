@@ -200,7 +200,7 @@ function updateNationCouchVersion() {
                                 configsDb.insert(configDoc, key, function(err, body) {
                                     if (err) throw err;
                                     else {
-                                    	if(oldRegister != configDoc.register) console.log("updated register number from " + oldRegister + " to " + configDoc.register);
+                                    	if(oldRegister != configDoc.register) console.log("updated register to " + configDoc.register);
                                     	console.log("updated version number from " + oldVersion + " to " + configDoc.version);
                                     }
                                 });
