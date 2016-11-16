@@ -8,7 +8,8 @@ $(function() {
         
         events: {
             "click .Search": function(e) {
-                this.renderTable($('#selectCommunity').val(), $('#searchText').val().toLowerCase())
+            	if($('#selectCommunity').length) this.renderTable($('#selectCommunity').val(), $('#searchText').val().toLowerCase())
+                else this.renderTable('', $('#searchText').val().toLowerCase())
             }
 
         },
