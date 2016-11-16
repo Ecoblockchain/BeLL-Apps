@@ -12,6 +12,7 @@ $(function() {
             'logout': 'MemberLogout',
             'member/add': 'MemberForm',
             'member/edit/:mid': 'MemberForm',
+            'member/view/:mid': 'MemberForm',
             'resources(/community)': 'Resources',
             'resources/pending': 'pendingResources',
             'resource/add': 'ResourceForm',
@@ -987,6 +988,7 @@ $(function() {
             //cv Set up
             // applyStylingSheet();
             var url_page = $.url().data.attr.fragment;
+            var url_split = url_page.split('/');
             var languageDictValue;
             var  clanguage;
             if(url_page=="member/add"){
@@ -1018,7 +1020,17 @@ $(function() {
             })
             App.$el.children('.body').html('<div id="AddCourseMainDiv"></div>');
             // Bind form to the DOM
-            if (modelId) {
+            if (modelId && url_split[1]=="view") {
+                model.id = modelId
+                model.fetch({
+                    async: false
+                })
+                nameOfLabel=label;
+                App.$el.children('.body').html('<div id="AddCourseMainDiv"></div>');
+                $('#AddCourseMainDiv').append('<h3>'+languageDictValue.get(nameOfLabel) + ' | ' + model.get('firstName') + '  ' + model.get('lastName') + '</h3>')
+
+            }
+            else if (modelId) {
                 model.id = modelId
                 model.fetch({
                     async: false
