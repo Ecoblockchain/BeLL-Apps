@@ -2707,11 +2707,11 @@ $(function() {
 	                dataType: "jsonp",
 	                async: false,
 	                success: function(json) {
-	                	var communityList = '<option value="">'+App.languageDict.attributes.Select_Comm+'</option>';
+	                	var communityList = '<option value="'+App.configuration.get('code')+'">'+App.configuration.get('name')+'</option>';
 	                	$.each(json.rows, function(rec, index) {
 	                		communityList += '<option value="'+this.value.Code+'">'+this.value.Name+'</option>';
 	                	})
-	                	communityList = '<select id="selectCommunity">'+communityList+'</select>';
+	                	communityList = '<select id="selectCommunity" style="margin-right: 30px;">'+communityList+'</select>';
 	                	$(communityList).insertBefore('#searchText');
                 	}
 	            });

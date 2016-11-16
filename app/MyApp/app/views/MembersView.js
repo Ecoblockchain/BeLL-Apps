@@ -10,8 +10,10 @@ $(function() {
             "click .Search": function(e) {
             	if($('#selectCommunity').length) this.renderTable($('#selectCommunity').val(), $('#searchText').val().toLowerCase())
                 else this.renderTable('', $('#searchText').val().toLowerCase())
-            }
-
+            },
+		    "change #selectCommunity": function(e) {
+		    	this.renderTable($('#selectCommunity').val(), $('#searchText').val().toLowerCase())
+		    }
         },
 
         render: function() {
