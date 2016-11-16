@@ -12,7 +12,7 @@ $(function() {
                 else this.renderTable('', $('#searchText').val().toLowerCase())
             },
 		    "change #selectCommunity": function(e) {
-		    	this.renderTable($('#selectCommunity').val(), $('#searchText').val().toLowerCase())
+		    	this.renderTable($('#selectCommunity').val(), '')
 		    }
         },
 
