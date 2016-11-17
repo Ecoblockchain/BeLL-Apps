@@ -7,6 +7,26 @@ before_install:
 - docker pull klaemo/couchdb
 - docker run -d -p 5984:5984 --name bell klaemo/couchdb
 - docker ps -a
+- mkdir -p ole; cd ole
+- git clone https://github.com/open-learning-exchange/BeLL-Apps.git
+- cd BeLL-Apps
+- echo "node_modules/.bin/couchapp push \\$1 \\$2" > pushDocToDb.sh
+- chmod +x node_modules/.bin/couchapp pushDocToDb.sh
+- cp install_windows install_linux
+- sed -i "s#pushDocToDb.bat#./pushDocToDb.sh#" install_linux
+- sed -i 's#databases\\\\\\\\#databases/#' install_linux
+- sed -i 's#databases\\\\\\#databases/#' install_linux
+- sed -i 's#databases\\\\#databases/#' install_linux
+- sed -i 's/NationBell/nation/' init_docs/ConfigurationsDoc-Nation.txt
+- sed -i 's/nationbell/NATION/' init_docs/ConfigurationsDoc-Nation.txt
+- sed -i 's#Male#Female#' install_linux
+- sed -i 's#somalia#nation#' install_linux
+- sed -i 's#"visits": 0#"visits":0,"bellLanguage":"English","BirthDate":"2010-10-15T04:00:00.000Z","community":"NATION"#' install_linux
+- while ! curl -X GET http://127.0.0.1:5984/_all_dbs ; do sleep 1; done
+- node install_linux http://127.0.0.1:5984
+- curl -X PUT 'http://127.0.0.1:5984/_config/log/file' -d '"/usr/local/var/log/couchdb/couch.log"'
+- curl -X PUT 'http://127.0.0.1:5984/_config/httpd/allow_jsonp' -d '"true"'
+- curl -X PUT 'http://127.0.0.1:5984/_config/admins/nation' -d '"oleoleole"'
 
 script:
 - docker ps -a | grep bell
