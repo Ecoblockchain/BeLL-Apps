@@ -25,3 +25,4 @@ before_install:
 
 script:
 - docker ps -a | grep bell
+- i=$(curl -X GET http://new.qa.ole.org:5985/_all_dbs | jq length); if [ $i -ne 37 ]; then exit 1; fi
