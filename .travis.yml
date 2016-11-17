@@ -1,13 +1,12 @@
 sudo: required
 
-
 notifications:
   webhooks:
     urls:
       - https://webhooks.gitter.im/e/f32286c047612bea82b0
     on_success: always  # options: [always|never|change] default: change
     on_failure: always  # options: [always|never|change] default: always
-    on_start: always    # options: [always|never|change] default: never
+    on_start: never    # options: [always|never|change] default: never
 
 services:
   - docker
