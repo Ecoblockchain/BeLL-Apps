@@ -1,0 +1,12 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+- docker pull klaemo/couchdb
+- docker run -d -p 5984:5984 --name bell klaemo/couchdb
+- docker ps -a
+
+script:
+- docker ps -a | grep bell
