@@ -10,7 +10,7 @@ before_install:
 - mkdir -p ole; cd ole
 - git clone https://github.com/open-learning-exchange/BeLL-Apps.git
 - cd BeLL-Apps
-- echo "node_modules/.bin/couchapp push \\$1 \\$2" > pushDocToDb.sh
+- echo "node_modules/.bin/couchapp push \$1 \$2" > pushDocToDb.sh
 - chmod +x node_modules/.bin/couchapp pushDocToDb.sh
 - cp install_windows install_linux
 - sed -i "s#pushDocToDb.bat#./pushDocToDb.sh#" install_linux
