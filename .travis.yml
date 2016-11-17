@@ -6,10 +6,6 @@ services:
 before_install:
 - docker pull klaemo/couchdb
 - docker run -d -p 5984:5984 --name bell klaemo/couchdb
-- docker ps -a
-- mkdir -p ole; cd ole
-- git clone https://github.com/open-learning-exchange/BeLL-Apps.git
-- cd BeLL-Apps
 - echo "node_modules/.bin/couchapp push \$1 \$2" > pushDocToDb.sh
 - chmod +x node_modules/.bin/couchapp pushDocToDb.sh
 - cp install_windows install_linux
