@@ -21,7 +21,6 @@ before_install:
 - sed -i 's/nationbell/NATION/' init_docs/ConfigurationsDoc-Nation.txt
 - sed -i 's#Male#Female#' install_linux
 - sed -i 's#somalia#nation#' install_linux
-- sed -i 's#"visits": 0#"visits":0,"bellLanguage":"English","BirthDate":"2010-10-15T04:00:00.000Z","community":"NATION"#' install_linux
 - while ! curl -X GET http://127.0.0.1:5984/_all_dbs ; do sleep 1; done
 - node install_linux http://127.0.0.1:5984
 - curl -X PUT 'http://127.0.0.1:5984/_config/log/file' -d '"/usr/local/var/log/couchdb/couch.log"'
