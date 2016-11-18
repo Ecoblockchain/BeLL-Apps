@@ -12,7 +12,7 @@ services:
   - docker
 
 before_install:
-  - docker pull klaemo/couchdb
+  - docker pull klaemo/couchdb:1.6.1
   - docker run -d -p 5984:5984 --name bell klaemo/couchdb
   - echo "node_modules/.bin/couchapp push \$1 \$2" > pushDocToDb.sh
   - chmod +x node_modules/.bin/couchapp pushDocToDb.sh
@@ -33,4 +33,5 @@ before_install:
 
 script:
   - docker ps -a | grep bell
-  - i=$(curl -X GET http://new.qa.ole.org:5985/_all_dbs | jq length); if [ $i -ne 38 ]; then exit 1; fi
+  - curl -X GET http://127.0.0.1:5984/_all_dbs
+  - i=$(curl -X GET http://127.0.0.1:5984/_all_dbs | jq length); if [ $i -ne 36 ]; then exit 1; fi
