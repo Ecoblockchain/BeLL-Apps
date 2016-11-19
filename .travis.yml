@@ -1,5 +1,9 @@
 sudo: required
 
+language: python
+python:
+  - "3.5"
+
 notifications:
   webhooks:
     urls:
@@ -11,9 +15,19 @@ notifications:
 services:
   - docker
 
+addons:
+  sauce_connect:
+    username: "dogi"
+  jwt:
+    secure: "dhXRocGdvpkAhjra2oJ+l+AzgdN+QCuVq0RHv7KGF3kaK6bmx/QMjkwDho7ZQ0ndR6TQ52qUkracVIVTDm+81ZiWjTdAP0QwWCITLaqB+KapgrEx7nMldjEzTDSj1rnQ4KmE+k0G3wbvjSGgD7V0JOBQTi1lKmwaI7kMmyhNBvM5KRhrrWx9oTFs99nx84XeEF3XayEix6eDTkxStc/RILLTMBJop9iAiTzpkXuwc5F+xs/PQXJ/lqhZyp5arihJvUCRPhpXgzrfc+LQJUMGVd7DHsv49BZPDSZ5y4D5r5u27AtAhTQiqM+ozvWWxvGi7ju5CW1wiLxBKDbjhbbCYaZdKH6kxoFGofJuswrGygUfaqVBg/tz0DxLKGMiNYedfJcNMBzOyXjEKzS52BdzLqZZmRj1JekaVHw1P6vkkCTU/512JMJZmlSE8LsROyMtIq8Vraz++gmYShNePtA4afVNckpnY8uvusWT/0f+td9K1yH7El4rMxO5j30q55K9nTDqE3R/GwgX4vxhdMJ//KeYgGTg9e/QlE9sUZad0GdaZmRr5iajqzXFAS9bQpLvyyRC4LviBEpXGkZhiicpbqIvYl6K+fvxl5/GhfQfIr0c35vlNMKcOUpr7zwySGch+mVo/pmXefKtaDDCGKdNJIW9qHY29JkBXrJBrfILnQ8="
+
+install:
+  - pip install selenium
+  - pip install sauceclient
+
 before_install:
   - docker pull klaemo/couchdb:1.6.1
-  - docker run -d -p 5984:5984 --name bell klaemo/couchdb
+  - docker run -d -p 5984:5984 --name bell klaemo/couchdb:1.6.1
   - echo "node_modules/.bin/couchapp push \$1 \$2" > pushDocToDb.sh
   - chmod +x node_modules/.bin/couchapp pushDocToDb.sh
   - cp install_windows install_linux
@@ -34,4 +48,5 @@ before_install:
 script:
   - docker ps -a | grep bell
   - curl -X GET http://127.0.0.1:5984/_all_dbs
-  - i=$(curl -X GET http://127.0.0.1:5984/_all_dbs | jq length); if [ $i -ne 36 ]; then exit 1; fi
+  - i=$(curl -X GET http://127.0.0.1:5984/_all_dbs | jq length); if [ $i -ne 38 ]; then exit 1; fi
+  - python tests/testfirstlogin.py
