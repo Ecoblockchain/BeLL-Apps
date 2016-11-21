@@ -50,7 +50,7 @@ class Bell(unittest.TestCase):
     def test_firstLogin(self):
         driver = self.driver
         # go to the home page
-        driver.get("http://localhost:5984/apps/_design/bell/MyApp/index.html")
+        driver.get("http://localhost:5982/apps/_design/bell/MyApp/index.html")
         # find the login element
         inputElement = driver.find_element_by_name("login")
         # type in the username
@@ -66,7 +66,7 @@ class Bell(unittest.TestCase):
         # print page
         print(driver.current_url)
         # ensure we're logged in
-        assert driver.current_url == "http://localhost:5984/apps/_design/bell/MyApp/index.html#configuration/add"
+        assert driver.current_url == "http://localhost:5982/apps/_design/bell/MyApp/index.html#configuration/add"
         #TODO fill configuration form out
 
     def tearDown(self):
